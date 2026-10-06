@@ -5,7 +5,8 @@ POST() {
   wget -q -O- --post-data="$2" --header="Content-Type: application/json" --header="$3" "$1"
 }
 
-TOKEN=$(wget -q -O- --post-data='{"username":"admin","password":"admin123"}' --header="Content-Type: application/json" "$BACKEND/auth/login" | grep -o '"token":"[^"]*' | cut -d'"' -f4)
+RESPONSE=$(wget -q -O- --post-data='{"username":"admin","password":"admin123"}' --header="Content-Type: application/json" --header="ngrok-skip-browser-warning: true" "$BACKEND/auth/login")
+TOKEN=$(echo $RESPONSE | grep -o '"token":"[^"]*' | cut -d'"' -f4)
 echo "Token: $TOKEN"
 
 SCENARIO="MINIMAL"
