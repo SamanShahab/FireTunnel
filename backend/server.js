@@ -4,6 +4,7 @@ const http = require("http");
 const { Server } = require("socket.io");
 const cors = require("cors");
 const mongoose = require("mongoose");
+const path = require("path");
 
 const seedScenarios = require("./seedScenarios");
 const { setActiveScenario, getActiveScenario } = require("./seedScenarios");
@@ -54,6 +55,12 @@ app.use("/api/devices", deviceRoutes);
 io.on("connection", (socket) => {
   console.log("Dashboard connected:", socket.id);
   socket.on("disconnect", () => console.log("Dashboard disconnected:", socket.id));
+});
+
+// Serve frontend build
+app.use(express.static(path.join(__dirname, "../dashboard/dist")));
+app.get(/^(?!\/api).*/, (req, res) => {
+  res.sendFile(path.join(__dirname, "../dashboard/dist/index.html"));
 });
 
 // MongoDB + server start

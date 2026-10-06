@@ -9,7 +9,7 @@ export function SocketProvider({ children }) {
   const [liveVpn, setLiveVpn] = useState([]);
 
   useEffect(() => {
-    const s = io("/");
+    const s = io("https://trimming-send-vividness.ngrok-free.dev");
     setSocket(s);
 
     s.on("newEvent", (event) => setLiveEvents((prev) => [event, ...prev].slice(0, 50)));

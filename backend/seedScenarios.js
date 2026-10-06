@@ -72,7 +72,6 @@ function startLivePolling(io) {
       const metric = await PerformanceMetric.create({
         scenario: activeScenario,
         metricType: "LATENCY",
-        run: Date.now(),
         value,
         unit: "ms",
         source: template.source,

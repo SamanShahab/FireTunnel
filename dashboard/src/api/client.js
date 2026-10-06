@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const api = axios.create({ baseURL: "/api" });
+const api = axios.create({ baseURL: "https://trimming-send-vividness.ngrok-free.dev/api" });
 
 api.interceptors.request.use((config) => {
   const token = localStorage.getItem("token");
